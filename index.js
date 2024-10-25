@@ -16,7 +16,7 @@ const namen=[
     "Michiel",
     "Ismail",
     "Janine",
-    "Junior" 
+    "Junior"
 ];
 //voorb: namen[0] = "Noah"; namen[7]="Taha"; namen[13]="Ids"; namen[14]="undefined"
 //als we dus een random getal tussen 0 en 13 genereren, kunnen we met dat getal
@@ -31,11 +31,34 @@ function randomname()
 
 function random2names()
 {
-    let random_nmbr = Math.floor(Math.random() * namen.length);
-    let random_nmbr2 = Math.floor(Math.random() * namen.length);
-    while(random_nmbr == random_nmbr2){
-        random_nmbr2 = Math.floor(Math.random() * namen.length);
+    if(namen.length > 0){
+    let naam1 = randomnameanddestroy();
+    let naam2 = randomnameanddestroy();
+    document.getElementById("naam").innerHTML += naam1 + " en " + naam2 + "<br>";
+    } else {
+        document.getElementById("naam").innerHTML += "de namen zijn op!";
     }
-    //alert("De gekozen naam is: " + namen[random_nmbr]);
-    document.getElementById("naam").innerText = namen[random_nmbr] + " en " + namen[random_nmbr2];
+}
+
+
+function randomnameanddestroy()
+{
+    let random_nmbr = Math.floor(Math.random() * namen.length);
+    let name = namen[random_nmbr];
+    namen.splice(random_nmbr, 1);
+    console.log(name + " " + namen);
+    return name;
+}
+
+function randomduos()
+{
+    while(namen.length > 0){
+        let naam1 = randomnameanddestroy();
+        let naam2 = randomnameanddestroy();
+        document.getElementById("naam").innerHTML += naam1 + " en " + naam2 + "<br>";
+    }
+    
+    //de twee namen die net gekozen zijn, moeten uit de namen-array gegooid worden
+    //dit kan met de splice-functie van javascript
+    //daarna: weer random2names met de nieuwe namen-array
 }
